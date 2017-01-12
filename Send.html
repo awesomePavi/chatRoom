@@ -15,7 +15,7 @@
 <body>
 <textarea id="data" rows="4" cols="50">
 </textarea>
-<button type="button" onclick="test()">
+<button type="button" onclick="sendInfo()">
     send
 </button>
 <script type="text/javascript">
@@ -27,7 +27,7 @@
         $.ajax({
             type: "POST",
             url: "https://pavipathtest1.azurewebsites.net/recieve.php",
-            data: {Time: timeTrack.getTime(),Info:document.getElementById("data").innerHTML},
+            data: {Time: timeTrack.getTime(),Info:document.getElementById("data").value},
             success: function (info) {
                alert(info);
             }
