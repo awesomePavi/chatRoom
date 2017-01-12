@@ -1,7 +1,8 @@
 <?php
 header('Content-type: application/json');
 $data= $_POST['data'];
-$decoded = json_decode($data, true);
+$tmp = json_encode($data);
+$decoded = json_decode($tmp, true);
 echo $decoded;
 
 $tmpFile = fopen("newfile.txt", "a") or die("Unable to open file!");
