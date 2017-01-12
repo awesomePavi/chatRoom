@@ -1,8 +1,8 @@
 <?php
 header('Content-type: application/json');
 $dataIn= $_POST['data'];
-$dateEncode = json_encode($dataIn);
-$data = json_decode($dateEncode, true);
+$dateEncode = json_encode($dataIn); //only way to get data out of a recieved json file
+$data = json_decode($dateEncode, true); //only way to convert to array
 echo $data;
 
 $tmpFile = fopen("log.txt", "w") or die("Unable to open file!");
@@ -21,16 +21,16 @@ $decoded['Message'];
 */
 
 $jsonFile = fopen("data1.json", "r") or die("Unable to open file!");
-$posFind = fread($jsonFile,filesize("data1.json"));
+$posFind = json_encode(fread($jsonFile,filesize("data1.json")));
 $allPos = json_decode($posFind, true);
 fclose($jsonFile);
 
+$getVals = json_decode($allPos['0'],true);
+
 fwrite($tmpFile, "---------------\n");
-fwrite($tmpFile, $allPos['0']);
+fwrite($tmpFile, $getVals['Name']);
 fwrite($tmpFile, "\n");
-fwrite($tmpFile, $allPos['0']['Name']);
-fwrite($tmpFile, "\n");
-fwrite($tmpFile, $allPos['0']['Info']);
+fwrite($tmpFile, $getVals['Info']);
 fwrite($tmpFile, "\n---------------\n");
 fclose($tmpFile);
 
