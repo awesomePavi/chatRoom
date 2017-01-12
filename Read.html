@@ -21,12 +21,13 @@
             url: "https://pavipathtest1.azurewebsites.net/update.php",
             success: function (info) {
                 document.getElementById("data").innerHTML = info;
+                console.log(info);
             }
         });
     }
     function loop(){
         test();
-        setTimeout(loop,10);
+        setTimeout(loop,1000);
     }
 </script>
 </body>
