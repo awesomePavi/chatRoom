@@ -26,7 +26,7 @@
     function send() {
         $.ajax({
             type: "POST",
-            url: "https://pavipathtest1.azurewebsites.net/update.php",
+            url: "https://pavipathtest1.azurewebsites.net/recieve.php",
             data: {"Info":document.getElementById("data").innerHTML},
             success: function (info) {
                alert(info);
