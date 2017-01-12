@@ -14,15 +14,14 @@
 </head>
 <body>
 <textarea id="data" rows="4" cols="50">
-
 </textarea>
-<button type="button" onclick="sendInfo()">
+<button type="button" onclick="test()">
     send
 </button>
 <script type="text/javascript">
     var timeTrack = new Date();
     function test(){
-        alert(document.getElementById("data").innerHTML );
+        alert(document.getElementById("data").value);
     }
     function sendInfo() {
         $.ajax({
