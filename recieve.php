@@ -5,6 +5,11 @@ $dateEncode = json_encode($dataIn); //only way to get data out of a recieved jso
 $data = json_decode($dateEncode, true); //only way to convert to array
 echo $data
 
+$jsonFile = fopen("CHAT.txt", "a") or die("Unable to open file!");
+fwrite($jsonFile, $data);
+fwrite($jsonFile, "<br>");
+fclose($jsonFile);
+
 /*
 $file="log.txt";
 $linecount = 0;
