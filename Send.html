@@ -20,6 +20,7 @@
     send
 </button>
 <script type="text/javascript">
+    var timeTrack = new Date();
     function test(){
         alert(document.getElementById("data").innerHTML )
     }
@@ -27,7 +28,7 @@
         $.ajax({
             type: "POST",
             url: "https://pavipathtest1.azurewebsites.net/recieve.php",
-            data: {"Info":document.getElementById("data").innerHTML},
+            data: {Time: timeTrack.getTime();,Info:document.getElementById("data").innerHTML},
             success: function (info) {
                alert(info);
             }
