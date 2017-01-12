@@ -10,19 +10,24 @@
  	</script>
     <title>Title</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-    <script type="text/javascript">
-        function test() {
-            $.ajax({
-                type: "POST",
-                url: "https://pavipathtest1.azurewebsites.net/update.php",
-                success: function (info) {
-                    alert(info);
-                }
-            });
-        }
-    </script>
-</head>
-<body onload="test()">
 
+</head>
+<body onload="loop()">
+<p id="data"></p>
+<script type="text/javascript">
+    function test() {
+        $.ajax({
+            type: "POST",
+            url: "https://pavipathtest1.azurewebsites.net/update.php",
+            success: function (info) {
+                document.getElementById("data").innerHTML = info;
+            }
+        });
+    }
+    function loop(){
+        test();
+        setTimeout(loop,5000);
+    }
+</script>
 </body>
 </html>

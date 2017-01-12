@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- from https://sheharyar.me/blog/free-ssl-for-github-pages-with-custom-domains/-->
+    <script type="text/javascript">
+        var host = "pavipathtest1.azurewebsites.net";
+        if ((host == window.location.host) && (window.location.protocol != "https:"))
+            window.location.protocol = "https";
+    </script>
+    <title>Title</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+</head>
+<body>
+<textarea id="data" rows="4" cols="50">
+
+</textarea>
+<button type="button" onclick="send()">
+    send
+</button>
+<script type="text/javascript">
+    function test(){
+        alert(document.getElementById("data").innerHTML )
+    }
+    function send() {
+        $.ajax({
+            type: "POST",
+            url: "https://pavipathtest1.azurewebsites.net/update.php",
+            data: {"Info":document.getElementById("data").innerHTML},
+            success: function (info) {
+               alert(info);
+            }
+        });
+    }
+</script>
+</body>
+</html>
