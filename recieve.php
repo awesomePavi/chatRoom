@@ -11,7 +11,7 @@ fwrite($tmpFile, $data['Name']);
 fwrite($tmpFile, "\n");
 fwrite($tmpFile, $data['Info']);
 fwrite($tmpFile, "\n---------------\n");
-fclose($tmpFile);
+
 
 
 
