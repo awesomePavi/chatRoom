@@ -1,7 +1,9 @@
 <?php
-$data = $_POST['data'] or $_REQUEST['data'];
-echo $data;
+$data= $_POST['data'];
+$decoded = json_encode($data);
+echo $decoded;
+
 $tmpFile = fopen("newfile.txt", "a") or die("Unable to open file!");
-fwrite($tmpFile, $data);
+fwrite($tmpFile, "Test");
 fclose($tmpFile);
 ?>
