@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script type="text/javascript">
+        function test() {
+            $.ajax({
+                type: "POST",
+                url: "http://pavipathtest1.azurewebsites.net/update.php",
+                success: function (info) {
+                    alert(info);
+                }
+            });
+        }
+    </script>
+</head>
+<body onload="test()">
+
+</body>
+</html>
