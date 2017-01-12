@@ -4,8 +4,11 @@ $data= $_POST['data'];
 echo $data;
 
 $tmpFile = fopen("log.txt", "w") or die("Unable to open file!");
-fwrite($tmpFil, $data);
-fclose($tmpFil);
+fwrite($tmpFile, "---------------");
+fwrite($tmpFile, $data);
+fwrite($tmpFile, "---------------");
+fclose($tmpFile);
+
 
 
 /*
