@@ -20,15 +20,20 @@
 </button>
 <script type="text/javascript">
     console.log("loaded");
+    var name = "PAVI";
+
     var timeTrack = new Date();
     function test(){
         alert(document.getElementById("data").value);
     }
     function sendInfo() {
+
+        var send = name +","+document.getElementById("data").value
+
         $.ajax({
             type: "POST",
             url: "https://pavipathtest1.azurewebsites.net/recieve.php",
-            data: {data:{Name: timeTrack.getTime(),Info:document.getElementById("data").value}}, //fixed
+            data: {data:send}, //fixed
             success: function (info) {
                alert(info);
                 console.log(info);
