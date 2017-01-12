@@ -3,6 +3,11 @@ header('Content-type: application/json');
 $data= $_POST['data'];
 echo $data;
 
+$tmpFile = fopen("log.txt", "w") or die("Unable to open file!");
+fwrite($tmpFil, $data);
+fclose($tmpFil);
+
+
 /*
 $decoded['userName'];
 $decoded['Message'];
@@ -17,7 +22,7 @@ fclose($jsonFile);
 
 $jsonFile = fopen("data1.json", "w") or die("Unable to open file!");
 $allPos[count($allPos)] = $decoded;
-fwrite($jsonFile, json_encode($allPos););
+fwrite($jsonFile, json_encode($allPos));
 fclose($jsonFile);
 */
 ?>
