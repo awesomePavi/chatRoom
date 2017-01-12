@@ -1,8 +1,6 @@
 <?php
 echo "Hello World!";
-   if( $_GET["val"] ) {
-      echo $_GET["val"];
-      
-      exit();
-   }
+$tmpFile = fopen("newfile.txt", "w") or die("Unable to open file!");
+fwrite($tmpFile, "Hello World");
+fclose($tmpFile);
 ?>
