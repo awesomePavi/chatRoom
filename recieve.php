@@ -7,7 +7,7 @@ $data = json_decode($dateEncode, true); //only way to convert to array
 
 $file = fopen("CHAT.txt", "a") or die("Unable to open file!");
 fwrite($file, $data);
-fwrite($file, "<br>");
+fwrite($file, "%9865");
 fclose($file);
 
 echo $data
