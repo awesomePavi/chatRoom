@@ -20,9 +20,9 @@
             type: "POST",
             url: "https://pavipathtest1.azurewebsites.net/update.php",
             success: function (info) {
-                document.getElementById("data").innerHTML = info;
                 console.log(info);
 
+                document.getElementById("data").innerHTML = info['responseText'];
             }
         });
     }
