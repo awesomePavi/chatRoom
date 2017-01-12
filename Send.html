@@ -27,7 +27,7 @@
         $.ajax({
             type: "POST",
             url: "https://pavipathtest1.azurewebsites.net/recieve.php",
-            data: {Time: timeTrack.getTime(),Info:document.getElementById("data").value},
+            data: {data:{Time: timeTrack.getTime(),Info:document.getElementById("data").value}}, //fixed
             success: function (info) {
                alert(info);
             }
