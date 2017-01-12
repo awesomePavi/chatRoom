@@ -5,10 +5,18 @@ $tmp = json_encode($data);
 $decoded = json_decode($tmp, true);
 echo $decoded;
 
-$tmpFile = fopen("newfile.txt", "a") or die("Unable to open file!");
-fwrite($tmpFile, "<br>");
-fwrite($tmpFile, $decoded['Info']);
-fwrite($tmpFile, " recieved at ");
-fwrite($tmpFile, $decoded['Time']);
-fclose($tmpFile);
+/*
+$decoded['userName'];
+$decoded['Message'];
+*/
+
+$jsonFile = fopen("data1.json", "r") or die("Unable to open file!");
+$posFind = fread($jsonFile,filesize("data1.json"));
+$allPos = json_decode($posFind, true);
+fclose($jsonFile);
+
+$jsonFile = fopen("data1.json", "w") or die("Unable to open file!");
+$allPos[count($allPos)] = $decoded;
+fwrite($jsonFile, json_encode($allPos););
+fclose($jsonFile);
 ?>
