@@ -5,6 +5,9 @@ $decoded = json_encode($data);
 echo $decoded;
 
 $tmpFile = fopen("newfile.txt", "a") or die("Unable to open file!");
-fwrite($tmpFile, "Test");
+fwrite($tmpFile, "\n");
+fwrite($tmpFile, $decoded['Info']);
+fwrite($tmpFile, " recieved at ");
+fwrite($tmpFile, $decoded['Time']);
 fclose($tmpFile);
 ?>
