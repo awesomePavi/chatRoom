@@ -6,7 +6,9 @@ echo $data;
 
 $tmpFile = fopen("log.txt", "w") or die("Unable to open file!");
 fwrite($tmpFile, "---------------\n");
-fwrite($tmpFile, $data);
+fwrite($tmpFile, $data['Name']);
+fwrite($tmpFile, "\n");
+fwrite($tmpFile, $data['Info']);
 fwrite($tmpFile, "\n---------------");
 fclose($tmpFile);
 
