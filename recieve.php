@@ -1,7 +1,8 @@
 <?php
 header('Content-type: application/json');
 $dataIn= $_POST['data'];
-$data = json_decode($dataIn, true);
+$dateEncode = json_encode($dataIn);
+$data = json_decode($dateEncode, true);
 echo $data;
 
 $tmpFile = fopen("log.txt", "w") or die("Unable to open file!");
