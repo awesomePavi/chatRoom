@@ -1,8 +1,8 @@
 <?php
-header('Content-type: application/json');
-$dataIn= $_POST['data'];
-$dateEncode = json_encode($dataIn); //only way to get data out of a recieved json file
-$data = json_decode($dateEncode, true); //only way to convert to array
+//header('Content-type: application/json');
+//$dataIn= $_POST['data'];
+//$dateEncode = json_encode($dataIn); //only way to get data out of a recieved json file
+//$data = json_decode($dateEncode, true); //only way to convert to array
 //echo $data;
 
 $file="log.txt";
@@ -12,7 +12,6 @@ while(!feof($handle)){
   $line = fgets($handle);
   $linecount++;
 }
-
 fclose($handle);
 
 echo $linecount;
@@ -31,7 +30,6 @@ fwrite($tmpFile, "\n---------------\n");
 /*
 $decoded['userName'];
 $decoded['Message'];
-*/
 
 $jsonFile = fopen("data1.json", "r") or die("Unable to open file!");
 $posFind = json_encode(fread($jsonFile,filesize("data1.json")));
