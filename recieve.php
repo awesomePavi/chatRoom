@@ -21,7 +21,7 @@ $decoded['Message'];
 */
 
 $jsonFile = fopen("data1.json", "r") or die("Unable to open file!");
-$posFind = json_encode(fread($jsonFile,filesize("data1.json")));
+$posFind = fread($jsonFile,filesize("data1.json"));
 $allPos = json_decode($posFind, true);
 fclose($jsonFile);
 
