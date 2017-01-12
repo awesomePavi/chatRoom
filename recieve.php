@@ -35,7 +35,7 @@ fwrite($tmpFile, "\n---------------\n");
 fclose($tmpFile);
 
 
-
+/*
 $jsonFile = fopen("data1.json", "w") or die("Unable to open file!");
 $allPos[count($allPos)] = $decoded;
 fwrite($jsonFile, json_encode($allPos));
