@@ -10,7 +10,7 @@ fwrite($tmpFile, "---------------\n");
 fwrite($tmpFile, $data['Name']);
 fwrite($tmpFile, "\n");
 fwrite($tmpFile, $data['Info']);
-fwrite($tmpFile, "\n---------------");
+fwrite($tmpFile, "\n---------------\n");
 fclose($tmpFile);
 
 
@@ -18,12 +18,21 @@ fclose($tmpFile);
 /*
 $decoded['userName'];
 $decoded['Message'];
-
+*/
 
 $jsonFile = fopen("data1.json", "r") or die("Unable to open file!");
 $posFind = json_encode(fread($jsonFile,filesize("data1.json")));
 $allPos = json_decode($posFind, true);
 fclose($jsonFile);
+
+fwrite($tmpFile, "---------------\n");
+fwrite($tmpFile, $allPos['0']);
+fwrite($tmpFile, "\n");
+fwrite($tmpFile, $allPos['0']['Name']);
+fwrite($tmpFile, "\n");
+fwrite($tmpFile, $allPos['0']['Info']);
+fwrite($tmpFile, "\n---------------\n");
+fclose($tmpFile);
 
 
 
