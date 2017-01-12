@@ -1,7 +1,9 @@
 <?php
 header('Content-type: application/json');
-var_dump($_POST['data']);
 $data= $_POST['data'];
+echo '<pre>';
+print_r($data);
+echo '</pre>';
 $decoded = json_encode($data);
 echo $decoded;
 
