@@ -25,7 +25,7 @@ $posFind = json_encode(fread($jsonFile,filesize("data1.json")));
 $allPos = json_decode($posFind, true);
 fclose($jsonFile);
 
-$getVals = json_decode($allPos['0'],true);
+$getVals = json_decode(json_encode($allPos['0']),true);
 
 fwrite($tmpFile, "---------------\n");
 fwrite($tmpFile, $getVals['Name']);
