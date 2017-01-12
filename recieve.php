@@ -1,12 +1,13 @@
 <?php
 header('Content-type: application/json');
-$data= $_POST['data'];
+$dataIn= $_POST['data'];
+$data = json_decode($dataIn, true);
 echo $data;
 
 $tmpFile = fopen("log.txt", "w") or die("Unable to open file!");
-fwrite($tmpFile, "---------------");
+fwrite($tmpFile, "---------------\n");
 fwrite($tmpFile, $data);
-fwrite($tmpFile, "---------------");
+fwrite($tmpFile, "\n---------------");
 fclose($tmpFile);
 
 
