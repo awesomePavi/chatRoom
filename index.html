@@ -1,218 +1,52 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
 <head>
-<script>
-if (location.protocol != 'http:')
-{
- location.href = 'http:' + window.location.href.substring(window.location.protocol.length);
-}
-</script>
-	<title>Chat v1.1</title>
-	<style>
-		span:nth-child(even) {
-			background-color: #EDEDED;
-		}
-		span:nth-child(odd) {
-			background-color: #FeFeFe;
-		}
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
-		body{
-			margin: 0;
-			padding: 0;
-		}
+  <title>Chat v2.0</title>
 
-		.bottomInfo{
-			padding: 0; margin: 0;
+  <link rel="stylesheet" type="text/css" href="./chat.css">
+  
+  <script>
+    if (location.protocol != 'http:')
+    {
+      location.href = 'http:' + window.location.href.substring(window.location.protocol.length);
+    }
+  </script>
+  <Script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></Script>
+  <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
+  <script src="./chat.js"></script>
 
-			font-size: 1.1em;
-		}
-
-		#pageInfo{
-			position: fixed; 
-			bottom: 0; 
-			padding: 0;
-			margin: 0;
-			width: 100%; 
-			height: 30px;
-      color: white;
-			background-color: #999999;
-		}
-
-		/* Fix send bar to top of page*/
-		#formSend{
-			position: fixed; 
-			top: 1px; 
-			width: 100%; 
-      padding: 0;
-      margin: 0;
-		}
-
-		#message{
-			font-size: 1.1em;
-      float: left;
-     margin: 0 0;
-      padding: 0 0;
-      display: inline-block;
-
-		}
-
-		#sendGo{
-			color: white;
-			background-color: #4CAF50;
-      display: inline-block;
-      border: none;
-      box-sizing: content-box;
-		}
-
-		#sendGo:hover{
-			color: white;
-			background-color: #45a049;
-			border: 1px;
-			cursor: pointer;
-		}
-
-		#messages{
-			font-size: 1.1em;
-		}
-
-		#messages a{
-			font-size: 1.1em;
-		}
-
-	</style>
-	<script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
-	<script src="http://code.jquery.com/jquery-1.11.1.js"></script>
 </head>
-<!-- Get username on page load -->
-<body onload="pageLoaded()" onkeypress="keyPressed(event)">
+<body onload="">
+  <!--  'Blank' Page -->
+  <div id="loginPage" class="modal">
 
-	<!-- Send Messages -->
-	<div id="formSend" >
-		<input id="message" autocomplete="on" style="width: 90%; height: 30px;" placeholder="Enter Message"></input>
-		<button id="sendGo" style="width: 7%; height: 30px;" onclick="sendMessage()">Send</button>
-	</div>
+    <!-- Login Area -->
+    <div>
+      <a id="nameERR" style="color: red"></a>
+      <h3>Enter a Display Name</h3>
+      <input id="enterUserName" type="text" name="msg" placeholder="name" onKeyPress="checkEnter(event,check)">
+      <button type="button" onclick="check()" >Submit</button>
+    </div>
 
-	<div id="messages" style="width: 100%; padding: 0; margin-top: 35px; margin:-bottom: 30px;">
+  </div>
 
-	</div>
+  <!--  Chat Header : Send Messages and Info  -->
+  <span id="message">
+    <button type="button" onclick="send()" >Send</button>
+    <input id="sendMSG" type="text" name="msg" placeholder="message" onKeyPress="checkEnter(event,send)">
+    <span>
+      Online:&nbsp;<a id="numUsers">0</a>
+      Messages:&nbsp;<a id="numMsgs">0</a>
+    </span>
+  </span>
 
-	<div id="pageInfo">
-	<a class="bottomInfo">Users-online:</a> 
-	<a class="bottomInfo" id="numUsers">0</a>
-	<a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
-	<a class="bottomInfo">Total-Messages:</a> 
-	<a class="bottomInfo" id="numMsgs">0</a>
-	</div>
+  <div id="spacer"></div>
 
-	<script type="text/javascript">
-		colorName = {server:"#FF0000"};
-		username = "Undefined"; 
-
-
-    //prompt for name on start
-    function getName() {
-    	var person = prompt("Please enter your name", "");
-    	if (person.length > 2 && person.length < 16) {
-    		console.log(person);
-    		console.log(person.length);
-    		username = person;
-    		colorName[username] = "#00FF00";
-    		console.log(colorName); 
-    	}else if(person.length <= 2){
-    		alert("Minimum Length is 3 characters.")
-    		getName();
-    	}else if(person.length >= 16){
-    		alert("Maximum Length is 15 characters.")
-    		getName();
-    	}else{
-    		getName();
-    	}
-
-    }
-
-    //display Message
-    function dispMsg(nme, msg){
-      //if new user
-      if(!colorName[nme]) {
-      	colorName[nme] =  "#"+((1<<24)*Math.random()|0).toString(16);
-      }
-
-
-      var holder = document.createElement("span");
-      holder.setAttribute("style", "display: block; padding: 2px");
-      var name = document.createElement("a");
-      name.style.color = colorName[nme];
-      name.style.width = "10%";
-      if (nme == username){
- name.innerHTML = "YOU";
-      }else{
-      name.innerHTML = nme;
-    }
-      var spacer = document.createElement("a");
-      spacer.innerHTML = "  :  ";
-      var message = document.createElement("a");
-      message.innerHTML = msg;
-      message.style.width = "80%";
-      var newLine = document.createElement("br");
-
-      holder.appendChild(name);
-      holder.appendChild(spacer);
-      holder.appendChild(message);
-      document.getElementById("messages").appendChild(holder);
-  }
-
-  function keyPressed(event){
-    if (event.keyCode == 13){
-      sendMessage();
-    }
-  }
-
-    //get socket information
-    var socket = io('http://chatpavipath.azurewebsites.net:80');
-
-
-   // io.connect()
-    // submit message
-    function sendMessage(){
-    	var msg = $('#message').val();
-    	if (msg.length < 1){
-    		alert("No message to send");
-    	}else{
-    		//send message via socket
-    		socket.emit('message', username ,msg);
-    		$('#message').val('');
-    		$('#message').placeholder("Enter Message");
-    		return false;
-    	}
-    }
-
-
-
-    //on message recieve
-    socket.on('message', function(name,msg){
-    	dispMsg(name,msg);
-    });
-
-    //on roominfo recived
-    socket.on('roomInfo', function(data){
-      console.log(data);
-      $('#numUsers').text(data['data']['numUsers']);
-      $('#numMsgs').text(data['data']['numMsgs']);
-    });
-
-    // on message history recieved
-    socket.on('messageHistory', function(history){
-      messageHistory = history['data'];
-      for(var i =0; i < messageHistory.length; i++){
-        dispMsg(messageHistory[i]['user'],messageHistory[i]['message']);
-      }
-    });
-
-    function pageLoaded(){
-      getName();
-      socket.emit('fresh',username);
-    }
-</script>
-
+  <!--  Chat Area : Messages  -->
+  <div id="dispMsgs">
+  </div>
+  
 </body>
 </html>
