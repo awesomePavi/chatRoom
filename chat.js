@@ -99,4 +99,5 @@ function send(){
 
     function contactServer(){	
       socket.emit('fresh',username);
+      Push.Permission.request();
     }
