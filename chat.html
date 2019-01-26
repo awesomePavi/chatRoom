@@ -7,6 +7,7 @@
 
   <Script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></Script>
   <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/push.js/1.0.5/push.js"></script>
 
 <!-- Azure quirk, avoid file refrencing -->
   <style>
@@ -227,6 +228,14 @@ function send(){
         name.innerHTML = "YOU";
       }else{
         name.innerHTML = nme;
+         Push.create(`New Message ~ ${nme}`, {
+            body: msg,
+            icon: "/icon.png",
+            timeout: 5000,
+            onClick: function() {
+                console.log(this);
+            }
+        });
       }
       holder.innerHTML = "<a style='color: "+colorName[nme]+"'>"+nme+"</a> : "+ msg;
 
@@ -255,6 +264,7 @@ function send(){
 
     function contactServer(){ 
       socket.emit('fresh',username);
+      Push.Permission.request(()=>{console.log("a")}, ()=>{console.log("b")});
     }
   </script>
 
