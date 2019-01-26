@@ -13,6 +13,11 @@ app.get('/', function(req, res){
   res.sendFile(__dirname + '/chat.html');
 });
 
+//response for get response for applet
+app.get('/serviceWorker.min.js', function(req, res){
+  res.sendFile(__dirname + '/serviceWorker.min.js');
+});
+
 //handle all  connections, and what happens
 io.on('connection', function(socket){
 
