@@ -62,6 +62,15 @@ function send(){
         name.innerHTML = "YOU";
       }else{
         name.innerHTML = nme;
+
+          Push.create(`New Message ~ ${nme}`, {
+              body: msg,
+              icon: "/icon.png",
+              timeout: 5000,
+              onClick: function() {
+                  console.log(this);
+              }
+          });
       }
       holder.innerHTML = "<a style='color: "+colorName[nme]+"'>"+nme+"</a> : "+ msg;
 
