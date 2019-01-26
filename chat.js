@@ -3,7 +3,7 @@
 	var colorName = {Server:"#FF0000"};
 	var username = "Undefined"; 
 	//get socket information
- var socket = io('http://chatpavipath.azurewebsites.net:80');
+ var socket = io('https://chatpavipath.azurewebsites.net:443');
 
  function addListeners(){
    document.getElementById('enterUserName').addEventListener('keypress',checkEnter(event,check));
